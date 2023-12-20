@@ -8,7 +8,7 @@
    if(isset($_GET['id'])){
         $id = $_GET['id'];
 
-        $sql = "SELECT * FROM category";
+        $sql = "SELECT * FROM category WHERE category_id='$id'";
         $query = mysqli_query($conn,$sql);
         $data = mysqli_fetch_assoc($query);
         $viewcatname = $data['category_name'];
