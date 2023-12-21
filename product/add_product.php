@@ -1,6 +1,7 @@
 <!-- Header Require -->
 <?php
     require('../header.php');
+    require('../sessionchecker.php');
 ?>
 <?php
    // This page Php Code here
@@ -27,30 +28,37 @@
    }
 }
 ?>
-    <div class="container-fluid">
-        <!-- Index Body Code Here -->
-        <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
-        <form action="add_product.php" method="POST">
-                <label for="product_name">Product Name</label>
-                <input type="text" name="product_name" class="form-control"><br>
-                <label for="category_id">Product Category</label>
-                    <select name="category_id" class="form-control">
-                        <?php 
-                               $sql = "SELECT * FROM category";
-                               $getdata = mysqli_query($conn,$sql);
-                               while($data = mysqli_fetch_assoc($getdata)){
-                                $category_name = $data['category_name'];
-                                $category_id = $data['category_id'];
-                                echo "<option value='".$category_id."'> ".$category_name." </option>";
-                            }
-                        ?>
-                    </select>
-                <br>
-                <label for="product_code">Product Code</label>
-                <input type="text" name="product_code" class="form-control"><br>
-                <input type="submit" name="submit" value="Add Product" class="btn btn-success">
-        </form>
-    </div>
+
+   
+        <div class="row">
+            <div class="col-sm-3">
+                <?php include('../sidebar.php') ?>
+            </div>
+
+            <div class="col-sm-9">
+            <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
+            <form action="add_product.php" method="POST">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" name="product_name" class="form-control"><br>
+                    <label for="category_id">Product Category</label>
+                        <select name="category_id" class="form-control">
+                            <?php 
+                                $sql = "SELECT * FROM category";
+                                $getdata = mysqli_query($conn,$sql);
+                                while($data = mysqli_fetch_assoc($getdata)){
+                                    $category_name = $data['category_name'];
+                                    $category_id = $data['category_id'];
+                                    echo "<option value='".$category_id."'> ".$category_name." </option>";
+                                }
+                            ?>
+                        </select>
+                    <br>
+                    <label for="product_code">Product Code</label>
+                    <input type="text" name="product_code" class="form-control"><br>
+                    <input type="submit" name="submit" value="Add Product" class="btn btn-info">
+            </form>
+            </div>
+        </div>
 <!-- Footer Require -->
 <?php
     require('../footer.php');

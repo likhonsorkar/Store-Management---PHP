@@ -90,9 +90,9 @@
 
                     <span class="link-danger"><?php echo $againpasserr;?></span>
 
-                    <button type="submit" class="mt-2 btn btn-success" name="submit">Registration</button>
+                    <button type="submit" class="mt-2 btn btn-info" name="submit">Registration</button>
             </form>
-            <h5 class="mt-1">Have an account? <a href="login.php">Login</a> </h5>
+            <h5 class="mt-1">Have an account? <a class="text-info"href="login.php">Login</a> </h5>
         </div>
         <div class="col-4"> 
 

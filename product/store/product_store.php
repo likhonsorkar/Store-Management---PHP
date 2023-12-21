@@ -1,6 +1,7 @@
 <!-- Header Require -->
 <?php
     require('../../header.php');
+    require('../../sessionchecker.php');
 ?>
 <?php
    // This page Php Code here
@@ -26,28 +27,34 @@
    }
 }
 ?>
-    <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <?php include('../../sidebar.php') ?>
+        </div>
+        <div class="col-sm-9">
         <!-- Index Body Code Here -->
         <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
-        <form action="product_store.php" method="POST">
-                <label for="product_id">Product</label>
-                    <select name="product_id" class="form-control">
-                        <?php 
-                               $sql = "SELECT * FROM product";
-                               $getdata = mysqli_query($conn,$sql);
-                               while($data = mysqli_fetch_assoc($getdata)){
-                                $product_name = $data['product_name'];
-                                $product_id  = $data['product_id'];
-                                echo "<option value='".$product_id."'> ".$product_name." </option>";
-                            }
-                        ?>
-                    </select>
-                <br>
-                <label for="store_product_quientity">Quientity</label>
-                <input type="text" name="store_product_quientity" class="form-control"><br>
-                <input type="submit" name="submit" value="Store Product" class="btn btn-success">
-        </form>
+            <form action="product_store.php" method="POST">
+                    <label for="product_id">Product</label>
+                        <select name="product_id" class="form-control">
+                            <?php 
+                                $sql = "SELECT * FROM product";
+                                $getdata = mysqli_query($conn,$sql);
+                                while($data = mysqli_fetch_assoc($getdata)){
+                                    $product_name = $data['product_name'];
+                                    $product_id  = $data['product_id'];
+                                    echo "<option value='".$product_id."'> ".$product_name." </option>";
+                                }
+                            ?>
+                        </select>
+                    <br>
+                    <label for="store_product_quientity">Quientity</label>
+                    <input type="text" name="store_product_quientity" class="form-control"><br>
+                    <input type="submit" name="submit" value="Store Product" class="btn btn-info">
+            </form>
+        </div>
     </div>
+    
 <!-- Footer Require -->
 <?php
     require('../../footer.php');

@@ -1,6 +1,7 @@
 <!-- Header Require -->
 <?php
     require('../header.php');
+    require('../sessionchecker.php');
 ?>
 <?php
    // This page Php Code here
@@ -18,16 +19,22 @@
         }
    }
 }
-?>
-    <div class="container-fluid">
+?>  
+    <div class="row">
+        <div class="col-sm-3">
+                <?php include('../sidebar.php'); ?>
+        </div>
+        <div class="col-sm-9">
         <!-- Index Body Code Here -->
         <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
         <form action="category_add.php" method="POST">
                 <label for="category_name">Category Name</label>
                 <input type="text" name="category_name" class="form-control"><br>
-                <input type="submit" name="submit" value="Add Category" class="btn btn-success">
+                <input type="submit" name="submit" value="Add Category" class="btn btn-info">
         </form>
     </div>
+    </div>
+    
 <!-- Footer Require -->
 <?php
     require('../footer.php');

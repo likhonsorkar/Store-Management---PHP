@@ -1,6 +1,5 @@
 <!-- Header Require -->
 <?php 
-    session_start();
     require('header.php');
     $emailerr = $passworderr = $email = $succesmsg ='';
 
@@ -11,8 +10,6 @@
         login($coockieuseremail,$coockieuserpassword,$conn);
         echo $coockieuseremail;
     }
-    
-
     if(isset($_GET['usercreatesuccess'])){
         $succesmsg = 'User created succesfull';
     }
@@ -28,7 +25,6 @@
         } else{
 
         }
-
         if(!empty($_POST['email']) && !empty($_POST['password'])){
             $email = $_POST['email'];
             $password = md5($_POST['password']);
@@ -58,14 +54,11 @@
          }
     }
 ?>
-
-
 <div class="container">
      <div class="row">
         <div class="col-4"> 
-
         </div>
-        <div class="col-4 mt-5"> 
+        <div class="col-4"> 
                 <!-- Registration Form -->
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                 <span class="link-success"><?php echo $succesmsg;?><br></span>
@@ -78,19 +71,16 @@
                 <label>
                 <input type="checkbox" name="remember" value="checked" checked> Remember me
                 </label> <br>
-                <button type="submit" class="mt-2 btn btn-success" name="submit">Login</button>
+                <button type="submit" class="mt-2 btn btn-info" name="submit">Login</button>
             </form>
-            <h5 class="mt-1">Don't have account? <a href="registration.php">Register</a> </h5>
+            <h5 class="mt-1">Don't have account? <a href="registration.php" class="text-info">Register</a> </h5>
         </div>
         <div class="col-4"> 
 
         </div>
     </div>
 </div>
-    
-
-
 <!-- Footer Require -->
 <?php
-    require('footer.php');
+  require('footer.php');
 ?>
