@@ -10,6 +10,9 @@
                     <?php include('sidebar.php') ?>
                 </div>
                 <div class="col-sm-9">
+                    <div class="row">
+                
+                    </div>
                     <div class="row ml-3">
                         <div class="col-lg-2 col-md-3 col-sm-4">
                             <a href="/stms/category/category_add.php">
@@ -68,6 +71,7 @@
             </div>
         </div>
     </div>
+
 <!-- Footer Require -->
 <?php
     require('footer.php');

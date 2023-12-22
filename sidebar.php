@@ -22,3 +22,7 @@
     <li class="list-group-item"><a class="text-dark" href="/stms/product/spend/product_spend.php">Spend Product</a></li>
     <li class="list-group-item"><a class="text-dark" href="/stms/product/spend/list_of_product_spend.php">List of Spend Product </a></li>
 </ul>
+<h5 class="bg-info text-white px-2 py-2 mb-0 mt-2">Report</h5>
+<ul class="list-group">
+    <li class="list-group-item"><a class="text-dark" href="/stms/report/report.php">Product Report</a></li>
+</ul>
