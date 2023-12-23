@@ -32,8 +32,11 @@
         }
    }
 }
-?>
-    <div class="container-fluid">
+?>  <div class="row">
+    <div class="col-sm-3">
+        <?php include('../../sidebar.php') ?>
+    </div>
+    <div class="col-sm-9">
         <!-- Index Body Code Here -->
         <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
         <form action="edit_product_store.php?id=<?php echo $id; ?>" method="POST">
@@ -57,9 +60,10 @@
             <label for="store_product_quientity">Quientity</label>
             <input type="text" name="store_product_quientity" class="form-control" value="<?php echo $store_product_quientity ?>"><br>
 
-            <input type="submit" name="submit" value="Edit Store Product" class="btn btn-success">
+            <input type="submit" name="submit" value="Edit Store Product" class="btn btn-info">
         </form>
 
+    </div>
     </div>
 <!-- Footer Require -->
 <?php

@@ -26,3 +26,9 @@
 <ul class="list-group">
     <li class="list-group-item"><a class="text-dark" href="/stms/report/report.php">Product Report</a></li>
 </ul>
+
+<h5 class="bg-info text-white px-2 py-2 mb-0 mt-2">User</h5>
+<ul class="list-group">
+    <li class="list-group-item"><a class="text-dark" href="/stms/registration.php">User Create</a></li>
+    <li class="list-group-item"><a class="text-dark" href="/stms/user_list.php">User List</a></li>
+</ul>

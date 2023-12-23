@@ -30,11 +30,13 @@
                         $dataname = mysqli_fetch_assoc($getdataname);
                         $product_name = $dataname['product_name'];
                         ?>
-                        <h3>Report for: <?php echo $product_name; ?></h3>
-                        <br>
                 </form>
+                
+            <div id="printarea">
+            <h3><br>Report for: <?php echo $product_name; ?></h3>
+                        <br>
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <h4>Store Product Report</h4>
                         <?php
                         if(isset($_GET['product_id'])){
@@ -55,7 +57,7 @@
                         }
                         ?>
                     </div>
-                    <div class="col-6">
+                    <div class="col-md-6">
                         <h4>Spend Product Report</h4>
                         <?php
                         if(isset($_GET['product_id'])){
@@ -80,14 +82,26 @@
                 <div class="row">
                     <div class="col-12">
                         <h4 class="text-center">Now Avaiable in store : <?php $avstore = $totalstore - $totalspend; echo $avstore; ?></h4>  
-                        <button class="btn btn-info">Print Report</button>
                     </div>
                 </div>
             </div>
+            <button id="printbtn" class="btn btn-info" onclick="printDiv('printarea');"><i class="bi bi-printer"></i>
+ Print Report</button>
             <?php
                 }  
             ?>
+        </div>
+    
    </div>
+   <script>
+    function printDiv($divName) {
+     var printContents = document.getElementById($divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printContents;
+     window.print();
+     document.body.innerHTML = originalContents;
+}
+   </script>
 <!-- Footer Require -->
 <?php
     require('../footer.php');

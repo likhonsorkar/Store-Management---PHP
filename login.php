@@ -1,86 +1,77 @@
-<!-- Header Require -->
-<?php 
-    require('header.php');
-    $emailerr = $passworderr = $email = $succesmsg ='';
+<?php
+require('header.php');
 
-    if(!isset($_COOKIE['useremail']) && !isset($_COOKIE['userpassword'])){
-    }else{
-        $coockieuseremail = $_COOKIE['useremail'];
-        $coockieuserpassword = $_COOKIE['userpassword'];
-        login($coockieuseremail,$coockieuserpassword,$conn);
-        echo $coockieuseremail;
+$emailerr = $passworderr = $email = $successmsg = $loginerrmsg = '';
+
+if (isset($_COOKIE['useremail']) && isset($_COOKIE['userpassword'])) {
+    $coockieuseremail = $_COOKIE['useremail'];
+    $coockieuserpassword = $_COOKIE['userpassword'];
+    login($coockieuseremail, $coockieuserpassword, $conn,"Session Expired Please Login<br>");
+}
+
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+    if (empty($email)) {
+        $emailerr = "Email Required";
     }
-    if(isset($_GET['usercreatesuccess'])){
-        $succesmsg = 'User created succesfull';
+    if (empty($password)) {
+        $passworderr = "Password Required";
     }
-    if(isset($_POST['submit'])){
-        if(empty($_POST['email'])){
-            $emailerr = "Email Required";
-        }else{
-            $email = $_POST['email'];
+    if (!empty($email) && !empty($password)) {
+        $password = md5($password);
+        if (isset($_POST['remember']) && $_POST['remember'] == "checked") {
+            setcookie('useremail', $email, time() + (3600 * 24 * 365), '/');
+            setcookie('userpassword', $password, time() + (3600 * 24 * 365), '/');
         }
 
-        if(empty($_POST['password'])){
-            $passworderr = "Password Required";
-        } else{
-
-        }
-        if(!empty($_POST['email']) && !empty($_POST['password'])){
-            $email = $_POST['email'];
-            $password = md5($_POST['password']);
-            if (isset($_POST['remember']) && $_POST['remember'] == "checked"){
-                setcookie('useremail', $email, time() + (3600 * 24 * 365), '/');
-                setcookie('userpassword',  $password, time() + (3600 * 24 * 365), '/');
-            } 
-            login($email,$password,$conn);           
-        }else{
-
-        }
+        login($email, $password, $conn, "Email or Password is wrong!<br>");
     }
-    function login($useremail,$usermd5password,$conn){
-            $email = $useremail;
-            $password = $usermd5password;
-            $sqlcheck = "SELECT * FROM user WHERE email ='$email' and password = '$password'";
-            $checkquery = mysqli_query($conn,$sqlcheck);
-            if(mysqli_num_rows($checkquery)>0){
-                while($row = $checkquery->fetch_assoc()) {
-                    $_SESSION['fname'] = $row['fname'];
-                    $_SESSION['lname'] = $row['lname'];
-                    $_SESSION['email'] = $row['email'];
-                  }
-                  header('location:index.php?loginsuccess');
-            }else{
-                echo "User Not Found<br>";
-         }
+}
+function login($useremail, $usermd5password, $conn,$loginerrrmsg)
+{
+    $email = $useremail;
+    $password = $usermd5password;
+    $sqlcheck = "SELECT * FROM user WHERE email ='$email' and password = '$password'";
+    $checkquery = mysqli_query($conn, $sqlcheck);
+
+    if (mysqli_num_rows($checkquery) > 0) {
+        $row = $checkquery->fetch_assoc();
+        $_SESSION['fname'] = $row['fname'];
+        $_SESSION['lname'] = $row['lname'];
+        $_SESSION['email'] = $row['email'];
+        header('location:index.php?loginsuccess');
+    } else {
+        global $loginerrmsg;
+        $loginerrmsg = $loginerrrmsg;;
     }
+}
 ?>
 <div class="container">
-     <div class="row">
-        <div class="col-4"> 
+    <div class="row">
+        <div class="col-4">
         </div>
-        <div class="col-4"> 
-                <!-- Registration Form -->
+        <div class="col-4">
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                <span class="link-success"><?php echo $succesmsg;?><br></span>
+                
+                <span class="text-danger"><?php echo $loginerrmsg; ?></span>
                 <label for="email" class="form-label mt-2">Email: </label>
-                <span class="link-danger">*<?php echo $emailerr;?></span>
-                <input type="email" name="email" class="form-control" value="<?php echo $email;?>">
+                <span class="text-danger">*<?php echo $emailerr; ?></span>
+                <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
                 <label for="password" class="form-label mt-2">Password: </label>
-                <span class="link-danger">*<?php echo $passworderr; ?></span>
+                <span class="text-danger">*<?php echo $passworderr; ?></span>
                 <input type="password" name="password" class="form-control">
                 <label>
-                <input type="checkbox" name="remember" value="checked" checked> Remember me
+                    <input type="checkbox" name="remember" value="checked" checked> Remember me
                 </label> <br>
                 <button type="submit" class="mt-2 btn btn-info" name="submit">Login</button>
             </form>
-            <h5 class="mt-1">Don't have account? <a href="registration.php" class="text-info">Register</a> </h5>
         </div>
-        <div class="col-4"> 
-
+        <div class="col-4">
         </div>
     </div>
 </div>
-<!-- Footer Require -->
+
 <?php
-  require('footer.php');
+require('footer.php');
 ?>

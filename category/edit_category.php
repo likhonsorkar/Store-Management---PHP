@@ -36,19 +36,26 @@
    }
 ?>
 
-<div class="container-fluid">
-    <!-- Index Body Code Here -->
-    <div class="msg"> 
-        <?php if(isset($_GET['msg'])){
-            echo $_GET['msg'];
-        }  
-        ?> 
+<div class="row">
+    <div class="col-sm-3">
+        <?php include('../sidebar.php') ?>
     </div>
-    <form action="edit_category.php?id=<?php echo $id; ?>" method="POST">
-        <label for="category_name">Category Name</label>
-        <input type="text" name="category_name" class="form-control" value="<?php echo $viewcatname; ?>"><br>
-        <input type="submit" name="submit" value="Edit Category" class="btn btn-success">
-    </form>
+    <div class="col-sm-9">
+        <div class="container-fluid">
+            <!-- Index Body Code Here -->
+            <div class="msg"> 
+                <?php if(isset($_GET['msg'])){
+                    echo $_GET['msg'];
+                }  
+                ?> 
+            </div>
+            <form action="edit_category.php?id=<?php echo $id; ?>" method="POST">
+                <label for="category_name">Category Name</label>
+                <input type="text" name="category_name" class="form-control" value="<?php echo $viewcatname; ?>"><br>
+                <input type="submit" name="submit" value="Edit Category" class="btn btn-info">
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- Footer Require -->

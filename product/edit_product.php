@@ -38,36 +38,41 @@
    }
 }
 ?>
-    <div class="container-fluid">
-        <!-- Index Body Code Here -->
-        <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
-        <form action="edit_product.php?id=<?php echo $id; ?>" method="POST">
-            <label for="product_name">Product Name</label>
-            <input type="text" name="product_name" class="form-control" value="<?php echo $product_name ?>"><br>
+    <div class="row">
+        <div class="col-sm-3">
+            <?php include('../sidebar.php') ?>
+        </div>
+        <div class="col-sm-9">
+            <!-- Index Body Code Here -->
+            <div class="msg"> <?php if(isset($_GET['msg'])) echo $_GET['msg']; ?> </div>
+            <form action="edit_product.php?id=<?php echo $id; ?>" method="POST">
+                <label for="product_name">Product Name</label>
+                <input type="text" name="product_name" class="form-control" value="<?php echo $product_name ?>"><br>
 
-            <label for="category_id">Product Category</label>
-            <select name="category_id" class="form-control">
-                <?php 
-                    $sql = "SELECT * FROM category";
-                    $getdata = mysqli_query($conn, $sql);
-                    while($data = mysqli_fetch_assoc($getdata)){
-                        $category_name = $data['category_name'];
-                        $category_id = $data['category_id'];
-                ?>
-                <option value="<?php echo $category_id ?>" <?php if($category_id ==$product_category) echo "selected"; ?>>
-                    <?php echo $category_name ?>
-                </option>
-                <?php
-                    }
-                ?>
-            </select><br>
+                <label for="category_id">Product Category</label>
+                <select name="category_id" class="form-control">
+                    <?php 
+                        $sql = "SELECT * FROM category";
+                        $getdata = mysqli_query($conn, $sql);
+                        while($data = mysqli_fetch_assoc($getdata)){
+                            $category_name = $data['category_name'];
+                            $category_id = $data['category_id'];
+                    ?>
+                    <option value="<?php echo $category_id ?>" <?php if($category_id ==$product_category) echo "selected"; ?>>
+                        <?php echo $category_name ?>
+                    </option>
+                    <?php
+                        }
+                    ?>
+                </select><br>
 
-            <label for="product_code">Product Code</label>
-            <input type="text" name="product_code" class="form-control" value="<?php echo $product_code ?>"><br>
+                <label for="product_code">Product Code</label>
+                <input type="text" name="product_code" class="form-control" value="<?php echo $product_code ?>"><br>
 
-            <input type="submit" name="submit" value="Edit Product" class="btn btn-success">
-        </form>
+                <input type="submit" name="submit" value="Edit Product" class="btn btn-info">
+            </form>
 
+        </div>
     </div>
 <!-- Footer Require -->
 <?php
