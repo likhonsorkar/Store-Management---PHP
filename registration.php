@@ -1,6 +1,5 @@
 <?php 
     require('header.php');
-    require('sessionchecker.php');
     $fname = $lname = $email = $password1 = $password2 = '';
     $fnameerr = $lnameerr = $emailerr = $password1err = $password2err = $againpasserr = $extramsg =""; 
     if(isset($_POST['submit'])){

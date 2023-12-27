@@ -1,7 +1,6 @@
 <!-- Header Require -->
 <?php
     require('../header.php');
-    require('../sessionchecker.php');
 ?>
 
 <?php
