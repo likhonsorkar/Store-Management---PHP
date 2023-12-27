@@ -10,6 +10,12 @@
         $sessionemail =  "useremail@gmail.com";
     }
     require('config.php');
+    if(isset($_SESSION['fname']) && isset($_SESSION['lname']) && isset($_SESSION['email'])){
+        // User is logged in, continue with your logic
+    } else {
+        header('location:login.php');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
